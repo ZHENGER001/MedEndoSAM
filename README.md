@@ -114,14 +114,13 @@ MedEndoSAM
 ##  Train
 To train the model:
 ```
-cd surgicalSAM/
+cd Medendosam/
 python train.py  --dataset endovis_2018
-python train.py  --dataset endovis_2017  --fold 0
+python train.py  --dataset vocalfolds
 ```
 
 ##  Inference
-To run inference on our provided SurgicalSAM checkpoints and obtain evaluation results:
 ```
-cd surgicalSAM/
+cd Medendosam/
 python inference.py  --dataset endovis_2018
-python inference.py  --dataset endovis_2017  --fold 0
+python inference.py  --dataset vocalfolds
