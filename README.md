@@ -33,5 +33,6 @@ conda create -n MedEndoSAM python=3.10
 conda activate MedEndoSAM
 pip install -r requirements.txt
 ```
-
+## Data
+We use the [EndoVis2018](https://endovissub2018-roboticscenesegmentation.grand-challenge.org/) [1] and [vocalfolds](https://github.com/imesluh/vocalfolds) [2] datasets in our experiments. 
 
