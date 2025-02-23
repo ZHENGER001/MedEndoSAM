@@ -48,7 +48,7 @@ Please find the checkpoint of SAM in `vit_h` version [here](https://dl.fbaipubli
 
 ##  File Organisation
 the files should be organised as follows.
-
+  ```tree
 MedEndoSAM
     |__figure
     |    ...
@@ -104,5 +104,5 @@ MedEndoSAM
     |   
     |__segment_anything
     |    ...
-
+  ```
 
