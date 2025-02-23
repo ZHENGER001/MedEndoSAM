@@ -97,12 +97,22 @@ MedEndoSAM
     |    |   |__sam_vit_h_4b8939.pth
     |    |
     |    |__medendosam
-    |            |__endovis_2018
-    |            |     ...
-    |            |__vocalfolds
-    |                    ...
-    |   
+    |            
+    |            
     |__segment_anything
     |    ...
   ```
+##  Train
+To train the model:
+```
+cd surgicalSAM/
+python train.py  --dataset endovis_2018
+python train.py  --dataset endovis_2017  --fold 0
+```
 
+##  Inference
+To run inference on our provided SurgicalSAM checkpoints and obtain evaluation results:
+```
+cd surgicalSAM/
+python inference.py  --dataset endovis_2018
+python inference.py  --dataset endovis_2017  --fold 0
