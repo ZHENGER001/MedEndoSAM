@@ -35,4 +35,8 @@ pip install -r requirements.txt
 ```
 ## Data
 We use the [EndoVis2018](https://endovissub2018-roboticscenesegmentation.grand-challenge.org/) [1] and [vocalfolds](https://github.com/imesluh/vocalfolds) [2] datasets in our experiments. 
-
+For training, we perform data augmentation and pre-compute the SAM features of the training data beforehand. The process is as follows:
+```
+cd Medendosam/tools/
+python data_preprocess.py
+```
