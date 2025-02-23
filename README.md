@@ -22,8 +22,16 @@ for endoscopic images and significantly enhances robustness in complex
 backgrounds, outperforming existing methods.
 ![](figure/framework.jpg)
 ## Clone Repository
+1. Clone the repository.
 ``` shell
 git clone https://github.com/ZHENGER001/MedEndoSAM.git
 cd MedEndoSAM/
 ```
+2. Create a virtual environment for SurgicalSAM and activate the environment.
+```shell
+conda create -n MedEndoSAM python=3.10
+conda activate MedEndoSAM
+pip install -r requirements.txt
+```
+
 
