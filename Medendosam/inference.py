@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 import numpy as np
 from segment_anything import sam_model_registry
-from dataset import Endovis18Dataset, Endovis17Dataset,VocalfolodsDataset
+from dataset import Endovis18Dataset, VocalfolodsDataset
 from model import Prototype_Prompt_Encoder, Learnable_Prototypes
 from model_forward import model_forward_function
 from matplotlib.colors import ListedColormap
@@ -77,7 +77,7 @@ def visualize_and_save_colored_masks(endovis_masks, save_dir='./endovis_masks_vi
 # Process arguments
 print("======> Process Arguments")
 parser = argparse.ArgumentParser()
-parser.add_argument('--dataset', type=str, default="endovis_2018", choices=["endovis_2018", "endovis_2017","vocalfolds_1"], help='specify dataset')
+parser.add_argument('--dataset', type=str, default="endovis_2018", choices=["endovis_2018", "vocalfolds"], help='specify dataset')
 parser.add_argument('--fold', type=int, default=0, choices=[0, 1, 2, 3], help='specify fold number for endovis_2017 dataset')
 args = parser.parse_args()
 
@@ -93,20 +93,15 @@ print("======> Load Dataset-Specific Parameters")
 if "18" in dataset_name:
     num_tokens = 2
     dataset = Endovis18Dataset(data_root_dir=data_root_dir, mode="val", vit_mode="h")
-    surgicalSAM_ckp = "/mnt/sdb/feilong/zheng/SurgicalSAM-main/surgicalSAM/work_dirs/endovis_2018/model_ckp_WLA.pth"
+    medendosam_ckp = "./work_dirs/endovis_2018/model_ckp.pth"
     gt_endovis_masks = read_gt_endovis_masks(data_root_dir=data_root_dir, mode="val")
-elif "17" in dataset_name:
-    num_tokens = 4
-    dataset = Endovis17Dataset(data_root_dir=data_root_dir, mode="val", fold=fold, vit_mode="h", version=0)
-    surgicalSAM_ckp = f"../ckp/surgical_sam/{dataset_name}/fold{fold}/model_ckp_P.pth"
-    gt_endovis_masks = read_gt_endovis_masks(data_root_dir=data_root_dir, mode="val", fold=fold)
 
 elif "vocalfolds" in dataset_name:
     num_tokens=2
     dataset= VocalfolodsDataset(data_root_dir = data_root_dir, 
                                    mode="val",
                                    vit_mode = "h")
-    surgicalSAM_ckp = "/mnt/sdb/feilong/zheng/SurgicalSAM-main/surgicalSAM/work_dirs/vocalfolds_1/model_ckp.pth"
+    medendosam_ckp = "./work_dirs/vocalfolds/model_ckp.pth"
     gt_endovis_masks = read_gt_endovis_masks(data_root_dir = data_root_dir, mode = "val")
 
 
@@ -125,17 +120,7 @@ print("======> Load Prototypes and Prototype-based Prompt Encoder")
 learnable_prototypes_model = Learnable_Prototypes(num_classes=7, feat_dim=256).cuda()
 protoype_prompt_encoder = Prototype_Prompt_Encoder(feat_dim=256, hidden_dim_dense=128, hidden_dim_sparse=128, size=64, num_tokens=num_tokens).cuda()
 
-checkpoint = torch.load(surgicalSAM_ckp)
-# 打印所有权重文件中的键
-print("Keys in checkpoint:")
-for key in checkpoint.keys():
-    print(key)
-
-# 如果需要查看特定键下的内容（如模型的 state_dict）
-if 'prototype_prompt_encoder_state_dict' in checkpoint:
-    print("\nKeys in 'prototype_prompt_encoder_state_dict':")
-    for k in checkpoint['prototype_prompt_encoder_state_dict'].keys():
-        print(k)
+checkpoint = torch.load(medendosam_ckp)
 
 protoype_prompt_encoder.load_state_dict(checkpoint['prototype_prompt_encoder_state_dict'])
 
