@@ -144,7 +144,7 @@ sam.cuda()
 predictor = SamPredictor(sam)
 
 
-data_root_dir = "/mnt/sdb/feilong/zheng/SurgicalSAM-main/data/vocalfolds_1"
+data_root_dir = "../../data/vocalfolds"
 
 mask_dir = osp.join(data_root_dir, "train", "0", "binary_annotations")
 frame_dir = osp.join(data_root_dir, "train",  "0", "images")
