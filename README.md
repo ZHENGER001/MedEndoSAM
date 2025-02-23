@@ -21,3 +21,9 @@ with a small number of parameters. It improves segmentation accuracy
 for endoscopic images and significantly enhances robustness in complex
 backgrounds, outperforming existing methods.
 ![](figure/framework.jpg)
+## Clone Repository
+``` shell
+git clone https://github.com/WZH0120/SAM2-UNet.git
+cd SAM2-UNet/
+```
+
