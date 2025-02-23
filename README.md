@@ -92,13 +92,22 @@ MedEndoSAM
     |              |     ...
     |              |__sam_features_h
     |                    ...
+    |__medendosam
+    |    |__.....
+    |      
+    | 
+    |   
+    |   
     |__ckp
     |    |__sam
     |    |   |__sam_vit_h_4b8939.pth
     |    |
     |    |__medendosam
-    |            
-    |            
+    |            |__endovis_2018
+    |            |     ...
+    |            |__vocalfolds
+    |                    ...
+    |   
     |__segment_anything
     |    ...
   ```
