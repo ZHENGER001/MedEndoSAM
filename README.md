@@ -20,3 +20,4 @@ doSAM achieves state-of-the-art performance across multiple metrics
 with a small number of parameters. It improves segmentation accuracy
 for endoscopic images and significantly enhances robustness in complex
 backgrounds, outperforming existing methods.
+![](figure/framework.jpg)
