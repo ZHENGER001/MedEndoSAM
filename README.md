@@ -23,7 +23,7 @@ backgrounds, outperforming existing methods.
 ![](figure/framework.jpg)
 ## Clone Repository
 ``` shell
-git clone https://github.com/WZH0120/SAM2-UNet.git
-cd SAM2-UNet/
+git clone https://github.com/ZHENGER001/MedEndoSAM.git
+cd MedEndoSAM/
 ```
 
