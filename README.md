@@ -45,3 +45,6 @@ python data_preprocess.py
 In MedEndoSAM, the vit_h model is utilized.
 
 Please find the checkpoint of SAM in `vit_h` version [here](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth). 
+
+
+
