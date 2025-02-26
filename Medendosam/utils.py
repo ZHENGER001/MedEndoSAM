@@ -190,26 +190,6 @@ def read_gt_endovis_masks(data_root_dir = "../data/endovis_2018",
                 mask = torch.from_numpy(cv2.imread(osp.join(gt_endovis_masks_path, full_mask_name),cv2.IMREAD_GRAYSCALE))
                 gt_endovis_masks[full_mask_name] = mask
                 
-    elif "2017" in data_root_dir:
-        if fold == "all":
-            seqs = [1,2,3,4,5,6,7,8]
-            
-        elif fold in [0,1,2,3]:
-            fold_seq = {0: [1, 3],
-                        1: [2, 5],
-                        2: [4, 8],
-                        3: [6, 7]}
-            
-            seqs = fold_seq[fold]
-        
-        gt_endovis_masks_path = osp.join(data_root_dir, "0", "annotations")
-        
-        for seq in seqs:
-            for mask_name in os.listdir(osp.join(gt_endovis_masks_path, f"seq{seq}")):
-                full_mask_name = f"seq{seq}/{mask_name}"
-                mask = torch.from_numpy(cv2.imread(osp.join(gt_endovis_masks_path, full_mask_name),cv2.IMREAD_GRAYSCALE))
-                gt_endovis_masks[full_mask_name] = mask
-    
     elif "vocalfolds" in data_root_dir:
         gt_endovis_masks_path = osp.join(data_root_dir, mode, "annotations")
         for seq in os.listdir(gt_endovis_masks_path):
