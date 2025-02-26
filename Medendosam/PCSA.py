@@ -12,7 +12,7 @@ class PartialConv3WithSpatialAttention(nn.Module):
         self.dim_untouched = dim - self.dim_conv3
         self.partial_conv3 = nn.Conv2d(self.dim_conv3, self.dim_conv3, 3, 1, 1, bias=False)
 
-        # 空间注意力模块
+        # Spatial attention module
         self.spatial_attention = nn.Sequential(
             nn.Conv2d(dim, 1, kernel_size=7, padding=3, bias=False),
             nn.Sigmoid()
@@ -26,10 +26,10 @@ class PartialConv3WithSpatialAttention(nn.Module):
             raise NotImplementedError
 
     def forward_slicing(self, x):
-        x = x.clone()  # 保持原始输入不变
+        x = x.clone()  # Keep the original input unchanged
         x[:, :self.dim_conv3, :, :] = self.partial_conv3(x[:, :self.dim_conv3, :, :])
 
-        # 添加空间注意力
+        # Add spatial attention
         attention_map = self.spatial_attention(x)
         x = x * attention_map
 
@@ -40,7 +40,7 @@ class PartialConv3WithSpatialAttention(nn.Module):
         x1 = self.partial_conv3(x1)
         x = torch.cat((x1, x2), 1)
 
-        # 添加空间注意力
+        # Add spatial attention
         attention_map = self.spatial_attention(x)
         x = x * attention_map
 
@@ -52,4 +52,3 @@ if __name__ == '__main__':
     input_tensor = torch.rand(1, 64, 64, 64).cuda()
     output = block(input_tensor)
     print(input_tensor.size(), output.size())
-
